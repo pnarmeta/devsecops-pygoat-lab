@@ -56,3 +56,11 @@ jobs:
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Build PyGoat Docker Image
+        run: |
+          docker build -t pygoat:devsecops .
+
+      - name: Verify Docker Image
+        run: |
+          docker images
