@@ -19,5 +19,14 @@ jobs:
           echo "Repository files:"
           ls -la
 
+      - name: Install Bandit
+        run: |
+          python -m pip install --upgrade pip
+          pip install bandit
+
+      - name: Run Bandit SAST Scan
+        run: |
+          bandit -r . -f txt
+
       - name: Hello DevSecOps
         run: echo "Starting my DevSecOps pipeline"
