@@ -113,3 +113,25 @@ jobs:
             --network devsecops-network \
             ghcr.io/zaproxy/zaproxy:stable \
             curl -I http://pygoat-ci:8000
+
+      - name: Run OWASP ZAP Baseline DAST Scan
+        continue-on-error: true
+        run: |
+          docker run --rm \
+            --network devsecops-network \
+            -v "${{ github.workspace }}:/zap/wrk/:rw" \
+            ghcr.io/zaproxy/zaproxy:stable \
+            zap-baseline.py \
+            -t http://pygoat-ci:8000 \
+            -r zap-report.html \
+            -J zap-report.json \
+            -I
+
+      - name: Upload ZAP DAST Reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: zap-dast-reports
+          path: |
+            zap-report.html
+            zap-report.json
