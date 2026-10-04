@@ -34,9 +34,6 @@ jobs:
           name: bandit-sast-report
           path: bandit-report.json
 
-      - name: Hello DevSecOps
-        run: echo "Starting my DevSecOps pipeline"
-
       - name: Install pip-audit
         run: |
           pip install pip-audit
