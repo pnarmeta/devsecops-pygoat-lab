@@ -4,9 +4,20 @@ on:
   workflow_dispatch:
 
 jobs:
-  hello-devsecops:
+  devsecops:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+
+      - name: Verify source code
+        run: |
+          echo "Current directory:"
+          pwd
+
+          echo "Repository files:"
+          ls -la
+
       - name: Hello DevSecOps
         run: echo "Starting my DevSecOps pipeline"
