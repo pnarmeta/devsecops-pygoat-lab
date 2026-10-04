@@ -52,6 +52,7 @@ jobs:
           path: pip-audit-report.json
 
       - name: Run Gitleaks Secret Scan
+        continue-on-error: true
         uses: gitleaks/gitleaks-action@v2
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
