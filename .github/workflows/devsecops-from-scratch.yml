@@ -36,3 +36,17 @@ jobs:
 
       - name: Hello DevSecOps
         run: echo "Starting my DevSecOps pipeline"
+
+      - name: Install pip-audit
+        run: |
+          pip install pip-audit
+
+      - name: Run SCA Dependency Scan
+        run: |
+          pip-audit -r requirements.txt -f json -o pip-audit-report.json || true
+
+      - name: Upload SCA Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: pip-audit-sca-report
+          path: pip-audit-report.json
