@@ -1,0 +1,12 @@
+name: DevSecOps From Scratch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  hello-devsecops:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Hello DevSecOps
+        run: echo "Starting my DevSecOps pipeline"
