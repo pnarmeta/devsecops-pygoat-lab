@@ -76,3 +76,11 @@ jobs:
         with:
           name: trivy-container-report
           path: trivy-report.json
+
+      - name: Start PyGoat Container
+        run: |
+          docker run -d --name pygoat-ci -p 8000:8000 pygoat:devsecops
+
+      - name: Verify PyGoat Container
+        run: |
+          docker ps
