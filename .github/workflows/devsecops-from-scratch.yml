@@ -84,3 +84,20 @@ jobs:
       - name: Verify PyGoat Container
         run: |
           docker ps
+
+      - name: Wait for PyGoat
+        run: |
+          echo "Waiting for PyGoat to start..."
+          for i in {1..30}; do
+            if curl -f http://localhost:8000 > /dev/null 2>&1; then
+              echo "PyGoat is responding successfully"
+              exit 0
+            fi
+
+            echo "Attempt $i - PyGoat not ready yet"
+            sleep 2
+          done
+
+          echo "PyGoat failed to start"
+          docker logs pygoat-ci
+          exit 1
